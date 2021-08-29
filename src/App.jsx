@@ -1,3 +1,4 @@
+import { throwStatement } from '@babel/types';
 import React from 'react';
 
 class App extends React.Component {
@@ -5,50 +6,23 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            data: 0
+            data : 'Initial data ...'
         }
-        this.setNewNumber = this.setNewNumber.bind(this)
+        this.updateState = this.updateState.bind(this);
     };
-    setNewNumber() {
-        this.setState({data: this.state.data + 1})
+
+    updateState(e) {
+        this.setState({data : e.target.value});
     }
     render() {
-        return(
+        return (
             <div>
-                <button onClick = {this.setNewNumber}>INCREMENT</button>
-                <Content myNumber = {this.state.data}></Content>
+                <input type = "text" value = {this.state.data}
+                    onChange = {this.updateState} />
+                <h4>{this.state.data}</h4>
             </div>
         );
     }
 }
-class Content extends React.Component {
-    componentWillMount() {
-        console.log('Component WILL MOUNT')
-    }
-    componentDidMount() {
-        console.log('Component DID MOUNT')
-    }
-    componentWillReceiveProps() {
-        console.log('Component WILL RECEIVE PROPS')
-    }
-    shouldComponentUpdate(newProps, newState) {
-        return true;
-    }
-    componentWillUpdate(nextProps, nextState) {
-        console.log('Component WILL UPDATE')
-    }
-    componentDidUpdate(prevProps, prevState) {
-        console.log('Component DID UPDATE')
-    }
-    componentWillUnmount() {
-        console.log('Component WILL UNMOUNT')
-    }
-    render() {
-        return(
-            <div>
-                <h3>{this.props.myNumber}</h3>
-            </div>
-        );
-    }
-}
+
 export default App;
