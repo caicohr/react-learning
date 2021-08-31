@@ -1,36 +1,30 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            data: "Initial data ..."
+            data: ''
         }
         this.updateState = this.updateState.bind(this);
+        this.clearInput = this.clearInput.bind(this);
+    };
+    updateState(e) {
+        this.setState({data: e.target.value});
     }
-
-    updateState() {
-        this.setState({data : 'Data updated from child component ...'})
+    clearInput() {
+        this.setState({data: ''});
+        ReactDOM.findDOMNode(this.refs.myInput).focus();
     }
-
     render() {
         return(
             <div>
-                <Content myDataProp = {this.state.data}
-                    updateStateProp = {this.updateState}>
-                </Content>
-            </div>
-        )
-    }
-}
-
-class Content extends React.Component {
-    render() {
-        return (
-            <div>
-                <button onClick = {this.props.updateStateProp}>CLICK</button>
-                <h3>{this.props.myDataProp}</h3>
+                <input value = {this.state.data} onChange = {this.updateState}
+                    ref = "myInput"></input>
+                <button onClick = {this.clearInput}>CLEAR</button>
+                <h4>{this.state.data}</h4>
             </div>
         );
     }
