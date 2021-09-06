@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from "history";
 
 class App extends React.Component {
    render() {
@@ -50,4 +51,3 @@ export class Contact extends React.Component {
    }
 }
 //export default Contact;
-
