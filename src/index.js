@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
 import { Router, Route, Link, BrowserRouter } from 'react-router-dom';
-import  {Home, About, Contact } from './App.jsx';
+import  {Home, Contact } from './App.jsx';
+import About from './about';
 
-//ReactDOM.render(<App/>, document.getElementById('root'));
+const routes = (
+    <BrowserRouter>
+       <App>
+          <Route path = "/" exact component = {Home} />
+          <Route path ="/about" component = {About} />
+          <Route path = "/" component = {Contact} />
+       </App>
+    </BrowserRouter>
+ )
+
 ReactDOM.render((
    <BrowserRouter>
        <App>
-           <Route path = "/" exact component = {Home}/>
-           <Route path = "/" component = {About}/>
-           <Route path = "/" component = {Contact}/>
+           
        </App>
    </BrowserRouter>), document.getElementById('root'))

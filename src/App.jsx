@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from "history";
@@ -7,17 +7,15 @@ class App extends React.Component {
    render() {
       return (
          <div>
-            <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-            </ul>
-            {this.props.children}
+            <Route path ="/" exact component = {Home} />
+            <Route path = "/" component = {About} />
+            <Route component = {Contact} />
          </div>
       )
    }
 }
 export default App;
+
 
 export class Home extends React.Component {
    render() {
