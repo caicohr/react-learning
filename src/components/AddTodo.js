@@ -20,5 +20,6 @@ export default class AddTodo extends Component {
     handleClick() {
         const node = this.myRef
         this.props.onAddClick(node)
+        
     }
 }
