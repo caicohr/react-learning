@@ -1,23 +1,18 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+
+import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
 import App from './App.jsx';
-import { Router, Route, Link, BrowserRouter } from 'react-router-dom';
-import  {Home, Contact } from './App.jsx';
-import About from './about';
+import todoApp from './reducers/reducers';
 
-const routes = (
-    <BrowserRouter>
-       <App>
-          <Route path = "/" exact component = {Home} />
-          <Route path ="/about" component = {About} />
-          <Route path = "/" component = {Contact} />
-       </App>
-    </BrowserRouter>
- )
+let store = createStore(todoApp)
+let rootElement = document.getElementById('root')
 
-ReactDOM.render((
-   <BrowserRouter>
-       <App>
-           
-       </App>
-   </BrowserRouter>), document.getElementById('root'))
+render(
+   <Provider store = {store}>
+      <App />
+   </Provider>,
+   rootElement
+)
