@@ -1,18 +1,34 @@
 import React from 'react';
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-class App extends React.Component {
+var newData = {
+   data: 'Data from HOC ...',
+}
+
+var MyHOC = ComposedComponent => class extends React.Component {
+   componentDidMount() {
+      this.setState({
+         data: newData.data
+      });
+   }
+   render() {
+      return <ComposedComponent {...this.state} {...this.state} />;
+   }
+};
+
+class MyComponent extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = {
+         data: "This is the data inside the Component!"
+      }
+   }
    render() {
       return (
          <div>
-            <ReactCSSTransitionGroup transitionName = "example"
-               transitionAppear = {true} transitionAppearTimeout = {500}
-               transitionEnter = {false} transitionLeave = {false}>
-					
-               <h1>My Element...</h1>
-            </ReactCSSTransitionGroup>
-         </div>      
-      );
+            <h1>{this.props.data}</h1>
+         </div>
+      )
    }
 }
-export default App;
+
+export default MyHOC(MyComponent);
