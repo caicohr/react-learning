@@ -43,13 +43,39 @@ class Welcome extends React.Component {
         );
     }
 }
+
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isToggleOn: true};
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.handleClick}>
+                    {this.state.isToggleOn ? 'ON' : 'OFF'}
+                </button>
+            </div>
+        );
+    }
+
+}
+
 class App extends React.Component {//second to run
     render() {//find the Welcome component then the clock component will run
         return <div>
+        <Toggle />
         <Welcome name="Ben" age="12"/>
         <Welcome name="Ten" age ="18"/>
-        <Clock />
-        <Clock />
         <Clock />
         </div>
     };
