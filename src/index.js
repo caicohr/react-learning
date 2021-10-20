@@ -104,13 +104,13 @@ function Greeting(props) {
 }
 
 function UserIn(props) {
-    return <button onClick={props.clicked}>
+    return <button onClick={props.onClick}>
         Logout
     </button>
 }
 
 function UserOut(props) {
-    return <button onClick={props.clicked}>
+    return <button onClick={props.onClick}>
         Login
     </button>
 }
@@ -133,17 +133,13 @@ class LoginStatus extends React.Component {
 
     render() {
         const isLoggedIn = this.state.isLoggedIn;
-        let button;
-        if (isLoggedIn) {
-            button = <UserIn clicked={this.UserLoggedOut}/>;
-        } else {
-            button = <UserOut clicked= {this.UserLoggedIn}/>;
-        }
-
         return (
             <div>
                 <Greeting isLoggedIn={isLoggedIn}/>
-                {button}
+                {isLoggedIn
+                ? <UserIn onClick = {this.UserLoggedOut}/>
+                : <UserOut onClick = {this.UserLoggedIn}/>
+                }
             </div>
             
         )
