@@ -47,7 +47,11 @@ class Welcome extends React.Component {
 class Toggle extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isToggleOn: true};
+        this.state = {
+            isToggleOn: true,
+            name: '',
+            age: ''
+        };
 
         this.handleClick = this.handleClick.bind(this);
     }
@@ -77,8 +81,25 @@ class App extends React.Component {//second to run
         <Welcome name="Ben" age="12"/>
         <Welcome name="Ten" age ="18"/>
         <Clock />
+        <Greeting isLoggedIn={false}/>
         </div>
     };
+}
+
+function UserGreeting() {
+    return <h1>Aloha, User!</h1>;
+}
+
+function GuestGreeting() {
+    return <h1>Aloha! Please Login or Sign Up.</h1>
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <UserGreeting />
+    }
+    return <GuestGreeting />
 }
 
 ReactDOM.render(//first to run
