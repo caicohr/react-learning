@@ -74,19 +74,6 @@ class Toggle extends React.Component {
 
 }
 
-class App extends React.Component {//second to run
-    render() {//find the Welcome component then the clock component will run
-        return <div>
-        <Toggle />
-        <Welcome name="Ben" age="12"/>
-        <Welcome name="Ten" age ="18"/>
-        <Clock />
-        <Greeting isLoggedIn={false}/>
-        <LoginStatus />
-        </div>
-    };
-}
-
 function UserGreeting() {
     return <h1>Aloha, User!</h1>;
 }
@@ -145,6 +132,62 @@ class LoginStatus extends React.Component {
         )
         
     }
+}
+
+class WarningBanner extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            boolWarning: false
+        }
+        this.handleWarningButton = this.handleWarningButton.bind(this);
+    }
+
+    handleWarningButton() {
+        this.setState(state => ({//try to remember this syntax
+            boolWarning: !state.boolWarning
+        }));
+    }
+
+    render() {
+        return (
+            <div>
+            <button onClick={this.handleWarningButton}>
+                {
+                    this.state.boolWarning
+                    ? 'Hide Warning'
+                    : 'Show Warning'
+                }
+            </button>
+                <WarningDiv warn={this.state.boolWarning}/>
+            </div>
+        )
+    }
+}
+
+function WarningDiv(props) {
+    if (!props.warn) {
+        return null;
+    }
+    return (
+        <div>
+            WARNING!!!
+        </div>
+        )
+}
+
+class App extends React.Component {//second to run
+    render() {//find the Welcome component then the clock component will run
+        return <div>
+        <Toggle />
+        <Welcome name="Ben" age="12"/>
+        <Welcome name="Ten" age ="18"/>
+        <Clock />
+        <Greeting isLoggedIn={false}/>
+        <LoginStatus />
+        <WarningBanner />
+        </div>
+    };
 }
 
 ReactDOM.render(//first to run
