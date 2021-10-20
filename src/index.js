@@ -82,6 +82,7 @@ class App extends React.Component {//second to run
         <Welcome name="Ten" age ="18"/>
         <Clock />
         <Greeting isLoggedIn={false}/>
+        <LoginStatus />
         </div>
     };
 }
@@ -100,6 +101,49 @@ function Greeting(props) {
         return <UserGreeting />
     }
     return <GuestGreeting />
+}
+
+function UserIn() {
+    <button>
+        Logout
+    </button>
+}
+
+function UserOut() {
+    <button>
+        Login
+    </button>
+}
+
+class LoginStatus extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isLoggedIn: false};
+        this.UserLoggedIn = this.UserLoggedIn.bind(this);
+        this.UserLoggedOut = this.UserLoggedOut.bind(this);
+    }
+
+    UserLoggedIn() {
+        this.setState({isLoggedIn: true});
+    }
+
+    UserLoggedOut() {
+        this.setState({isLoggedIn: true});
+    }
+
+    render() {
+        const isLoggedIn = false;
+        return (
+            <div>
+                if (isLoggedIn) {
+                UserIn()
+            }
+            UserOut()
+            </div>
+            
+        )
+        
+    }
 }
 
 ReactDOM.render(//first to run
