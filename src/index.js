@@ -186,8 +186,27 @@ class App extends React.Component {//second to run
         <Greeting isLoggedIn={false}/>
         <LoginStatus />
         <WarningBanner />
+        <ListMaker inputList={['a','b','c','d','e']}/>
         </div>
     };
+}
+
+class ListMaker extends React.Component {
+    constructor(props) {
+        super(props);
+
+    }
+    render() {
+        const theList = this.props.inputList;
+        return (
+            <div>
+                <ul>
+                    {theList.map((list) =>
+                    <li>{list}</li>)}
+                </ul>
+            </div>
+        )
+    }
 }
 
 ReactDOM.render(//first to run
