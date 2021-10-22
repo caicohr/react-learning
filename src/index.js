@@ -186,29 +186,43 @@ class App extends React.Component {//second to run
         <Greeting isLoggedIn={false}/>
         <LoginStatus />
         <WarningBanner />
-        <ListMaker inputList={['a','b','c','d','e']}/>
+        <ListMaker inputList={[1,2,3,4,5]}/>
+        <ShowList numbers={numbers}/>
         </div>
     };
 }
 
 class ListMaker extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
     render() {
         const theList = this.props.inputList;
+        const listItems = theList.map((number) =>
+            <li key={number.toString()}>
+                {number}
+            </li>)
+        ;
         return (
             <div>
                 <ul>
-                    {theList.map((list) =>
-                    <li>{list}</li>)}
+                {listItems}
                 </ul>
             </div>
         )
     }
 }
 
+function ShowList(props) {
+    const numbers = props.numbers;
+    const listList = numbers.map((num) =>
+        <li key={num.toString()}>
+        {num}
+        </li>
+    );
+    return (
+        <ul>{listList}</ul>
+    );
+}
+
+const numbers = [6,7,8,9,10];
 ReactDOM.render(//first to run
     <App />,
     document.getElementById('root')
