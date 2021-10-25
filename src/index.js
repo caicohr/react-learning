@@ -210,7 +210,7 @@ class FormPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'Essay here'
+            value: 'coconut'
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -230,8 +230,13 @@ class FormPage extends React.Component {
         return(
             <form onSubmit={this.handleSubmit}>
                 <label>
-                    Name:
-                    <textarea value={this.state.value} onChange={this.handleChange}/>
+                    Pick your favorite color:
+                    <select value={this.state.value} onChange= {this.handleChange}>
+                        <option value="grapefruit">Grapefruit</option>
+                        <option value="lime">Lime</option>
+                        <option value="coconut">Coconut</option>
+                        <option value="mango">Mango</option>
+                    </select>
                 </label>
                 <input type="submit" value="Submit"/>
             </form>
