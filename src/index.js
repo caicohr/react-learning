@@ -176,22 +176,6 @@ function WarningDiv(props) {
         )
 }
 
-class App extends React.Component {//second to run
-    render() {//find the Welcome component then the clock component will run
-        return <div>
-        <Toggle />
-        <Welcome name="Ben" age="12"/>
-        <Welcome name="Ten" age ="18"/>
-        <Clock />
-        <Greeting isLoggedIn={false}/>
-        <LoginStatus />
-        <WarningBanner />
-        <ListMaker inputList={[1,2,3,4,5]}/>
-        <ShowList numbers={numbers}/>
-        </div>
-    };
-}
-
 class ListMaker extends React.Component {
     render() {
         const theList = this.props.inputList;
@@ -220,6 +204,55 @@ function ShowList(props) {
     return (
         <ul>{listList}</ul>
     );
+}
+
+class FormPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        }
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    render() {
+        return(
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Name:
+                    <input type="text" value={this.state.value} onChange={this.handleChange}/>
+                </label>
+            </form>
+        )
+    }
+}
+
+class App extends React.Component {//second to run
+    render() {//find the Welcome component then the clock component will run
+        return <div>
+        <Toggle />
+        <Welcome name="Ben" age="12"/>
+        <Welcome name="Ten" age ="18"/>
+        <Clock />
+        <Greeting isLoggedIn={false}/>
+        <LoginStatus />
+        <WarningBanner />
+        <ListMaker inputList={[1,2,3,4,5]}/>
+        <ShowList numbers={numbers}/>
+        <FormPage />
+        </div>
+    };
 }
 
 const numbers = [6,7,8,9,10];
