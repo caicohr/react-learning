@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './App.css';
+
 class Clock extends React.Component {//after the React.DOM finds this
     constructor(props) {//First, initiate the value
         super(props);
@@ -210,7 +212,9 @@ class FormPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 'coconut'
+            color: 'coconut',
+            isGoing: true,
+            numberOfGuests: 2
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -218,12 +222,18 @@ class FormPage extends React.Component {
     }
 
     handleSubmit(event) {
-        alert('Essay submitted: ' + this.state.value);
+        alert('Color: ' + this.state.color + ' Is Going: ' + this.state.isGoing + ' Number of Guests: ' + this.state.numberOfGuests);
         event.preventDefault();
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
@@ -231,12 +241,27 @@ class FormPage extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Pick your favorite color:
-                    <select value={this.state.value} onChange= {this.handleChange}>
+                    <select value={this.state.color} onChange= {this.handleChange} name="color">
                         <option value="grapefruit">Grapefruit</option>
                         <option value="lime">Lime</option>
                         <option value="coconut">Coconut</option>
                         <option value="mango">Mango</option>
                     </select>
+                    <br />
+                </label>
+                <label>
+                Is going:
+                <input type="checkbox" name="isGoing" checked={this.state.isGoing} onChange={this.handleChange}>
+                </input>
+                </label>
+                <br/>
+                <label>
+                Number of Guests:
+                <input
+                name="numberOfGuests"
+                type="number"
+                value={this.state.numberOfGuests}
+                onChange={this.handleChange}></input>
                 </label>
                 <input type="submit" value="Submit"/>
             </form>
