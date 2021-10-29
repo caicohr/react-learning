@@ -269,9 +269,47 @@ class FormPage extends React.Component {
     }
 }
 
+function WillBoil(props) {
+    if (props.celsius >= 100) {
+        return (
+        <p>The water would boil</p>
+        );
+    }
+    return (
+        <p>The water would not boil</p>
+    );
+}
+
+class Calculator extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            temperature: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({temperature: e.target.value});
+    }
+
+    render() {
+        return (
+            <div>
+                At what temperature: 
+                <input type="number" value={this.state.temperature} onChange={this.handleChange}></input>
+                <input type= "submit" value="Submit"/>
+                <WillBoil celsius={this.state.temperature}/>
+            </div>
+        )
+    }
+}
+
 class App extends React.Component {//second to run
     render() {//find the Welcome component then the clock component will run
         return <div>
+        <Calculator />
         <Toggle />
         <Welcome name="Ben" age="12"/>
         <Welcome name="Ten" age ="18"/>
