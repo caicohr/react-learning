@@ -284,8 +284,8 @@ class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            celTemperature: '',
-            farTemperature: '',
+            celTemperature: 0,
+            farTemperature: 32,
             boolUnit: true
         }
 
@@ -313,20 +313,18 @@ class Calculator extends React.Component {
         return (
             this.state.boolUnit ?
                 <div>
-                    <button onClick= {this.changeTemperatureUnit}>Change unit</button>
-                    <br />
                     At what celsius temperature:
-                    <input type="number" value={cel} onChange={this.handleChange}></input>
-                    <br /> {(cel * (9/5) + 32)} in Farenheit
+                    <input type="number" value={cel} onChange={this.handleChange}></input> (This is {(cel * (9/5) + 32)} in farenheit)
+                    <br />
+                    <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
                     <WillBoil celsius={cel}/>
                 </div>
                 :
                 <div>
-                    <button onClick= {this.changeTemperatureUnit}>Change unit</button>
-                    <br />
                     At what farenheit temperature:
-                    <input type="number" value={far} onChange={this.handleChange}></input>
-                    <br /> {((far - 32) * (5/9))} in celsius
+                    <input type="number" value={far} onChange={this.handleChange}></input> (This is {((far - 32) * (5/9))} in celsius)
+                    <br />
+                    <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
                     <WillBoil celsius={((far - 32) * (5/9))}/>
                 </div>
         )
