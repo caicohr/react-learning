@@ -315,7 +315,7 @@ class OwnCalculator extends React.Component {
                 <div>
                     <fieldset>
                         <legend>At what celsius temperature:</legend>
-                        <input type="number" value={cel} onChange={this.handleChange}></input> (This is {(cel * (9/5) + 32)} in farenheit)
+                        <input type="number" value={cel} onChange={this.handleChange}></input> (This is {toFarenheit(cel)} in farenheit)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
                         <WillBoil celsius={cel}/>
@@ -325,14 +325,22 @@ class OwnCalculator extends React.Component {
                 <div>
                     <fieldset>
                         <legend>At what farenheit temperature:</legend>
-                        <input type="number" value={far} onChange={this.handleChange}></input> (This is {((far - 32) * (5/9))} in celsius)
+                        <input type="number" value={far} onChange={this.handleChange}></input> (This is {toCelsius(far)} in celsius)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
-                        <WillBoil celsius={((far - 32) * (5/9))}/>
+                        <WillBoil celsius={toCelsius(far)}/>
                     </fieldset>
                 </div>
         )
     }
+}
+
+function toCelsius(farenheit) {
+    return (farenheit - 32) * 5 / 9;
+}
+
+function toFarenheit(celsius) {
+    return (celsius * 9 / 5) + 32;
 }
 
 class Calculator extends React.Component {
