@@ -284,24 +284,51 @@ class Calculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            temperature: ''
+            celTemperature: '',
+            farTemperature: '',
+            boolUnit: true
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.changeTemperatureUnit = this.changeTemperatureUnit.bind(this);
     }
 
     handleChange(e) {
-        this.setState({temperature: e.target.value});
+        if (this.state.boolUnit) {
+            this.setState({celTemperature: e.target.value});
+        }
+        this.setState({farTemperature: e.target.value});
+    }
+
+    changeTemperatureUnit() {
+        this.setState(previousState => ({
+            boolUnit: !previousState.boolUnit
+        }));
     }
 
     render() {
+        const cel = this.state.celTemperature;
+        const far = this.state.farTemperature;
+
         return (
-            <div>
-                At what temperature: 
-                <input type="number" value={this.state.temperature} onChange={this.handleChange}></input>
-                <input type= "submit" value="Submit"/>
-                <WillBoil celsius={this.state.temperature}/>
-            </div>
+            this.state.boolUnit ?
+                <div>
+                    <button onClick= {this.changeTemperatureUnit}>Change unit</button>
+                    <br />
+                    At what celsius temperature:
+                    <input type="number" value={cel} onChange={this.handleChange}></input>
+                    <br /> {(cel * (9/5) + 32)} in Farenheit
+                    <WillBoil celsius={cel}/>
+                </div>
+                :
+                <div>
+                    <button onClick= {this.changeTemperatureUnit}>Change unit</button>
+                    <br />
+                    At what farenheit temperature:
+                    <input type="number" value={far} onChange={this.handleChange}></input>
+                    <br /> {((far - 32) * (5/9))} in celsius
+                    <WillBoil celsius={((far - 32) * (5/9))}/>
+                </div>
         )
     }
 }
