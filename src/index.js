@@ -280,7 +280,7 @@ function WillBoil(props) {
     );
 }
 
-class Calculator extends React.Component {
+class OwnCalculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -313,39 +313,100 @@ class Calculator extends React.Component {
         return (
             this.state.boolUnit ?
                 <div>
-                    At what celsius temperature:
-                    <input type="number" value={cel} onChange={this.handleChange}></input> (This is {(cel * (9/5) + 32)} in farenheit)
-                    <br />
-                    <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
-                    <WillBoil celsius={cel}/>
+                    <fieldset>
+                        <legend>At what celsius temperature:</legend>
+                        <input type="number" value={cel} onChange={this.handleChange}></input> (This is {(cel * (9/5) + 32)} in farenheit)
+                        <br />
+                        <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
+                        <WillBoil celsius={cel}/>
+                    </fieldset>
                 </div>
                 :
                 <div>
-                    At what farenheit temperature:
-                    <input type="number" value={far} onChange={this.handleChange}></input> (This is {((far - 32) * (5/9))} in celsius)
-                    <br />
-                    <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
-                    <WillBoil celsius={((far - 32) * (5/9))}/>
+                    <fieldset>
+                        <legend>At what farenheit temperature:</legend>
+                        <input type="number" value={far} onChange={this.handleChange}></input> (This is {((far - 32) * (5/9))} in celsius)
+                        <br />
+                        <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
+                        <WillBoil celsius={((far - 32) * (5/9))}/>
+                    </fieldset>
                 </div>
+        )
+    }
+}
+
+class Calculator extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            temperature: ''
+        }
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+    
+    handleChange(e) {
+        this.setState({temperature : e.target.value});
+    }
+
+    render() {
+        return (
+            <div>
+                <TemperatureInput scale="c" />
+                <TemperatureInput scale = "f" /> 
+            </div>
+        )
+    }
+}
+
+const scaleNames = {
+    c: 'Celsius',
+    f: 'Farenheit'
+};
+
+class TemperatureInput extends React.Component {
+    constructor(props){
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state = {temperature: ''}
+    }
+
+    handleChange(e) {
+        this.setState({temperature: e.target.value});
+    }
+
+    render() {
+        const temperature = this.state.temperature;
+        const scale = this.props.scale;
+        return (
+            <fieldset>
+                <legend>Enter temperature in {scaleNames[scale]}:</legend>
+                <input value={temperature} onchange={this.handleChange} />
+            </fieldset>
         )
     }
 }
 
 class App extends React.Component {//second to run
     render() {//find the Welcome component then the clock component will run
-        return <div>
-        <Calculator />
-        <Toggle />
-        <Welcome name="Ben" age="12"/>
-        <Welcome name="Ten" age ="18"/>
-        <Clock />
-        <Greeting isLoggedIn={false}/>
-        <LoginStatus />
-        <WarningBanner />
-        <ListMaker inputList={[1,2,3,4,5]}/>
-        <ShowList numbers={numbers}/>
-        <FormPage />
-        </div>
+        return (
+            <div>
+                <p>Own Calclulator Style</p>
+                <OwnCalculator />
+                <p>React Style</p>
+                <Calculator />
+                <Welcome name="Ben" age="12"/>
+                <Welcome name="Ten" age ="18"/>
+                <Clock />
+                <Greeting isLoggedIn={false}/>
+                <LoginStatus />
+                <WarningBanner />
+                <ListMaker inputList={[1,2,3,4,5]}/>
+                <ShowList numbers={numbers}/>
+                <FormPage />
+                <Toggle />
+            </div>
+        )
     };
 }
 
