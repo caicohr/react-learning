@@ -395,6 +395,16 @@ class TemperatureInput extends React.Component {
     }
 }
 
+function tryConvert(temperature, convert) {
+    const input = parseFloat(temperature);
+    if (Number.isNaN(input)) {
+        return '';
+    }
+    const output = convert(input);
+    const rounded = Math.round(output * 1000) / 1000;
+    return rounded.toString();
+}
+
 class App extends React.Component {//second to run
     render() {//find the Welcome component then the clock component will run
         return (
