@@ -284,8 +284,7 @@ class OwnCalculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            celTemperature: 0,
-            farTemperature: 32,
+            temperature: '',
             boolUnit: true
         }
 
@@ -294,10 +293,7 @@ class OwnCalculator extends React.Component {
     }
 
     handleChange(e) {
-        if (this.state.boolUnit) {
-            this.setState({celTemperature: e.target.value});
-        }
-        this.setState({farTemperature: e.target.value});
+        this.setState({temperature: e.target.value});
     }
 
     changeTemperatureUnit() {
@@ -307,28 +303,27 @@ class OwnCalculator extends React.Component {
     }
 
     render() {
-        const cel = this.state.celTemperature;
-        const far = this.state.farTemperature;
-
+        const temperature = this.state.temperature;
+        const celTemperature = toCelsius(temperature);
         return (
             this.state.boolUnit ?
                 <div>
                     <fieldset>
                         <legend>At what celsius temperature:</legend>
-                        <input type="number" value={cel} onChange={this.handleChange}></input> (This is {toFarenheit(cel)} in farenheit)
+                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {toFarenheit(temperature)} in farenheit)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
-                        <WillBoil celsius={cel}/>
+                        <WillBoil celsius={temperature}/>
                     </fieldset>
                 </div>
                 :
                 <div>
                     <fieldset>
                         <legend>At what farenheit temperature:</legend>
-                        <input type="number" value={far} onChange={this.handleChange}></input> (This is {toCelsius(far)} in celsius)
+                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {celTemperature} in celsius)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
-                        <WillBoil celsius={toCelsius(far)}/>
+                        <WillBoil celsius={celTemperature}/>
                     </fieldset>
                 </div>
         )
@@ -372,7 +367,8 @@ class Calculator extends React.Component {
         return (
             <div>
                 <TemperatureInput scale="c" temperature={celsius} onTemperatureChange={this.handleCelsiusChange}/>
-                <TemperatureInput scale = "f" temperature={farenheit} onTemperatureChange={this.handleFarenheitChange}/> 
+                <TemperatureInput scale = "f" temperature={farenheit} onTemperatureChange={this.handleFarenheitChange}/>
+                <WillBoil celsius={celsius} />
             </div>
         )
     }
