@@ -419,17 +419,65 @@ function FancyBorder(props) {
     );
 }
 
-function WelcomeDialog() {
-    return(
+function Dialog(props) {
+    return (
         <FancyBorder color="blue">
             <h1 className="Dialog-title">
-                Welcome
+                {props.title}
             </h1>
             <p className="Dialog-message">
-                Thank you for visiting our spacecraft!
+                {props.message}
             </p>
+            {props.children}
         </FancyBorder>
     );
+}
+
+function WelcomeDialog() {
+    return (
+        <Dialog
+            title="Welcome"
+            message="Thank you for visiting our spacecraft!"
+        />
+    )
+}
+
+function GoodByeDialog() {
+    return (
+        <Dialog 
+            title="Bye"
+            message = "Come back anytime"
+        />
+    )
+}
+
+class SignUpDialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
+        this.state = {name: ''}
+    }
+
+    handleChange(e) {
+        this.setState({name: e.target.value});
+    }
+
+    handleSignUp() {
+        alert("Welcome Aboad" + this.state.name + "!")
+    }
+
+    render() {
+        return (
+            <Dialog
+                title="Sign up"
+                message="You ready?"
+            >
+                <input value={this.state.name} onChange={this.handleChange}></input>
+                <button onClick={this.handleSignUp}>Sign me up!</button>
+            </Dialog>
+        )
+    }
 }
 
 class App extends React.Component {//second to run
@@ -437,6 +485,7 @@ class App extends React.Component {//second to run
         return (
             <div>
                 <WelcomeDialog />
+                <SignUpDialog />
                 <p>Own Calclulator Style</p>
                 <OwnCalculator />
                 <p>React Style</p>
@@ -451,6 +500,7 @@ class App extends React.Component {//second to run
                 <ShowList numbers={numbers}/>
                 <FormPage />
                 <Toggle />
+                <GoodByeDialog />
             </div>
         )
     };
