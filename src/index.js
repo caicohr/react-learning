@@ -310,7 +310,7 @@ class OwnCalculator extends React.Component {
                 <div>
                     <fieldset>
                         <legend>At what celsius temperature:</legend>
-                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {toFarenheit(temperature)} in farenheit)
+                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {tryConvert(temperature,toFarenheit)} in farenheit)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Farenheit</button>
                         <WillBoil celsius={temperature}/>
@@ -320,7 +320,7 @@ class OwnCalculator extends React.Component {
                 <div>
                     <fieldset>
                         <legend>At what farenheit temperature:</legend>
-                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {celTemperature} in celsius)
+                        <input type="number" value={temperature} onChange={this.handleChange}></input> (This is {tryConvert(temperature,toCelsius)} in celsius)
                         <br />
                         <button onClick= {this.changeTemperatureUnit}>Change unit to Celsius</button>
                         <WillBoil celsius={celTemperature}/>
